@@ -40,7 +40,7 @@ namespace core_tool_empty
 			{
 				endpoints.Map("/name", async c => 
 				{
-					await c.Response.WriteAsync("Hello Jagadeep ");
+					await c.Response.WriteAsync("Hello Jagadeep");
 				});
 			});
 		}
