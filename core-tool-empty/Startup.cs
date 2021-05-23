@@ -30,6 +30,13 @@ namespace core_tool_empty
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.Use(async (context, next) =>
+                {
+                    //await context.Request.Headers.Add();
+                    await next();
+                    //await context.Response.WriteAsync("from response");
+                });
             }
 
             app.UseStaticFiles();
