@@ -1,6 +1,8 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using core_tool_empty.Data;
+
+@model Books;
+
+
 @{
     ViewBag.Title = "Index";
 }
@@ -24,6 +26,18 @@
         <p> @a</p>
     }
 
+</div>
+
+<div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post)) {
+    <div>
+        @Html.TextBoxFor(model => model.Name)
+        <br />
+        @Html.TextBoxFor(model => model.Author)
+        <br />
+        <input type="submit" value="submit"  />
+    </div>
+    }
 </div>
 <script type="text/javascript">
     $(document).ready(function () {

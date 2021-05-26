@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
+using core_tool_empty.Data;
+using Microsoft.EntityFrameworkCore;
+using core_tool_empty.DAL;
 
 namespace core_tool_empty
 {
@@ -17,6 +20,11 @@ namespace core_tool_empty
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDBContext>(option =>
+            {
+                option.UseSqlServer("Server=.;Database=Books;Integrated Security=true;");
+            });
+            services.AddScoped<Crud, Crud>();
             services.AddControllersWithViews();
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
