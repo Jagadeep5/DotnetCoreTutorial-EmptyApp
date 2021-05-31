@@ -1,4 +1,7 @@
 ﻿
+@using Microsoft.Extensions.Configuration;
+
+@inject IConfiguration _configuration;
 
 @Html.Display("app_name")
 <br />
@@ -13,4 +16,10 @@
 <br />
 @Html.Display("connStr")
 <br />
+<div>
+    @{
+        var appname = _configuration.GetValue<string>("AppName");
+        <text><b>@appname</b></text>
+    }
+</div>
 <a asp-action="Index"><<< Go to Index</a>
