@@ -1,0 +1,16 @@
+﻿
+
+@Html.Display("app_name")
+<br />
+@Html.Display("app_bool")
+<br />
+@Html.Display("app_bool2")
+<br />
+@foreach (string a in ViewBag.app_obj)
+{
+    <li>@a</li>
+}
+<br />
+@Html.Display("connStr")
+<br />
+<a asp-action="Index"><<< Go to Index</a>

@@ -12,6 +12,7 @@ using core_tool_empty.Data;
 using Microsoft.EntityFrameworkCore;
 using core_tool_empty.DAL;
 using core_tool_empty.DALEntity;
+using Microsoft.Extensions.Configuration;
 
 namespace core_tool_empty
 {
@@ -19,11 +20,16 @@ namespace core_tool_empty
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        private readonly IConfiguration _config = null;
+        public Startup(IConfiguration configuration)
+        {
+            this._config = configuration;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDBContext>(option =>
             {
-                option.UseSqlServer("Server=.;Database=Books;Integrated Security=true;");
+                option.UseSqlServer(this._config.GetConnectionString("Dev"));
             });
             services.AddScoped<ICrud, Crud>();
             services.AddControllersWithViews();
