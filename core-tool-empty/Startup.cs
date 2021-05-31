@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using core_tool_empty.Data;
 using Microsoft.EntityFrameworkCore;
 using core_tool_empty.DAL;
+using core_tool_empty.DALEntity;
 
 namespace core_tool_empty
 {
@@ -24,7 +25,7 @@ namespace core_tool_empty
             {
                 option.UseSqlServer("Server=.;Database=Books;Integrated Security=true;");
             });
-            services.AddScoped<Crud, Crud>();
+            services.AddScoped<ICrud, Crud>();
             services.AddControllersWithViews();
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -61,7 +62,8 @@ namespace core_tool_empty
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();
             });
 
             //app.UseEndpoints(endpoints =>

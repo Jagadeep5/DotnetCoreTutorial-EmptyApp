@@ -1,1 +1,16 @@
-﻿ 
+﻿
+<style>
+    .text {
+
+    }
+    .btn{
+
+    }
+</style>
+
+<form asp-action="tag" method="post">
+     @Html.TextBox("name","", new { @class="text" })
+    <input type="submit" value="Submit" class="btn" />
+ </form>
+
+@Html.Display("na")

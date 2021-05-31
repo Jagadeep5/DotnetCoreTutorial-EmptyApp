@@ -1,11 +1,19 @@
 ﻿@using core_tool_empty.Data;
 
+
 @model Books;
 
 
 @{
     ViewBag.Title = "Index";
 }
+
+<style>
+    .smallclose {
+        height: 20px;
+        width: 20px;
+    }
+</style>
 
 
 
@@ -29,18 +37,32 @@
 </div>
 
 <div>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post)) {
-    <div>
-        @Html.TextBoxFor(model => model.Name)
-        <br />
-        @Html.TextBoxFor(model => model.Author)
-        <br />
-        <input type="submit" value="submit"  />
-    </div>
+    @foreach (var book in ViewBag.bookList)
+    {
+        <ul>
+            <li>@book.Id - @book.Name - @book.Author <a asp-controller="Home" asp-action="delete" asp-route-id="@book.Id"><img class="smallclose" src="~/Images/smallclose.png" alt="X" /> </a> </li>
+        </ul>
+    }
+</div>
+
+<div>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <div>
+            @Html.TextBoxFor(model => model.Name)
+            <br />
+            @Html.TextBoxFor(model => model.Author)
+            <br />
+            <input type="submit" value="submit" />
+            <br />
+            @Html.DisplayFor(model => model.Id)
+        </div>
     }
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        alert("sdjhfjdsk")
+        $(".smallclose").click(function () {
+            $.ajax("home/index").
+        })
     })
 </script>
