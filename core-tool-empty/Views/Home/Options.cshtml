@@ -1,0 +1,18 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Options";
+}
+
+<h1>Options</h1>
+
+<div>
+    @if (Model.AuthorDetails is object) {
+    <ul>
+        <li>@Model.AuthorDetails.Name</li>
+        <li>@Model.AuthorDetails.Age</li>
+        <li>@Model.AuthorDetails.Experience</li>
+    </ul>
+    }
+</div>
+

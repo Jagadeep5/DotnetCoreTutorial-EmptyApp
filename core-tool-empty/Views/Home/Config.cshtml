@@ -3,6 +3,10 @@
 
 @inject IConfiguration _configuration;
 
+@model dynamic
+
+<a asp-action="Index"><<< Go to Index</a>
+
 @Html.Display("app_name")
 <br />
 @Html.Display("app_bool")
@@ -22,4 +26,40 @@
         <text><b>@appname</b></text>
     }
 </div>
-<a asp-action="Index"><<< Go to Index</a>
+
+<h1>Options, OptionsSnapShot</h1>
+
+<div>
+    <h3>Options</h3>
+    @if (Model.AuthorDetails is object)
+    {
+        <ul>
+            <li>@Model.AuthorDetails.Name</li>
+            <li>@Model.AuthorDetails.Age</li>
+            <li>@Model.AuthorDetails.Experience</li>
+        </ul>
+    }
+
+    <h3>Options Snap</h3>
+
+    @if (Model.AuthorDetailsSnap is object)
+    {
+        <ul>
+            <li>@Model.AuthorDetailsSnap.Name</li>
+            <li>@Model.AuthorDetailsSnap.Age</li>
+            <li>@Model.AuthorDetailsSnap.Experience</li>
+        </ul>
+    }
+
+    <h3>Named option snap</h3>
+
+    @if (Model.DeveloperInfo is object)
+    {
+        <ul>
+            <li>@Model.DeveloperInfo.Name</li>
+            <li>@Model.DeveloperInfo.Age</li>
+            <li>@Model.DeveloperInfo.Experience</li>
+        </ul>
+    }
+</div>
+

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using core_tool_empty.DAL;
 using core_tool_empty.DALEntity;
 using Microsoft.Extensions.Configuration;
+using core_tool_empty.ConfigEntity;
 
 namespace core_tool_empty
 {
@@ -32,6 +33,9 @@ namespace core_tool_empty
                 option.UseSqlServer(this._config.GetConnectionString("Dev"));
             });
             services.AddScoped<ICrud, Crud>();
+            services.Configure<AuthorDetails>(this._config.GetSection("AuthorInfo"));
+            services.Configure<AuthorDetails>("DeveloperInfo", this._config.GetSection("DeveloperInfo"));
+
             services.AddControllersWithViews();
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
