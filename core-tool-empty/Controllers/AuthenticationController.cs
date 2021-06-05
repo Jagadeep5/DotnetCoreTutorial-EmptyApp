@@ -48,11 +48,16 @@ namespace core_tool_empty.Controllers
         public async Task<IActionResult> SignIn(Login login)
         {
             var result = await this._authentication.LoginUserAsync(login);
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                return RedirectToAction("Index", "home");
+                if (result.IsNotAllowed)
+                    ModelState.AddModelError("", "Not Autherised");
+
+                ModelState.AddModelError("", "Invalid login attempt");
+
+                return View();
             }
-            return View();
+            return RedirectToAction("Index", "home");
         }
     }
 }
