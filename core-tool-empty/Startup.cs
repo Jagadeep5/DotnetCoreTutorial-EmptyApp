@@ -14,6 +14,7 @@ using core_tool_empty.DAL;
 using core_tool_empty.DALEntity;
 using Microsoft.Extensions.Configuration;
 using core_tool_empty.ConfigEntity;
+using Microsoft.AspNetCore.Identity;
 
 namespace core_tool_empty
 {
@@ -32,11 +33,16 @@ namespace core_tool_empty
             {
                 option.UseSqlServer(this._config.GetConnectionString("Dev"));
             });
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+
             services.AddScoped<ICrud, Crud>();
+            services.AddScoped<IAuthentication, Authentication>();
+
             services.Configure<AuthorDetails>(this._config.GetSection("AuthorInfo"));
             services.Configure<AuthorDetails>("DeveloperInfo", this._config.GetSection("DeveloperInfo"));
-
             services.AddControllersWithViews();
+
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
@@ -57,6 +63,8 @@ namespace core_tool_empty
                     //await context.Response.WriteAsync("from response");
                 });
             }
+
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 
