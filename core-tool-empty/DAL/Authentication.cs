@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using core_tool_empty.DALEntity;
 using core_tool_empty.Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
 namespace core_tool_empty.DAL
@@ -34,5 +35,14 @@ namespace core_tool_empty.DAL
             return result;
         }
 
+        public async Task<IList<AuthenticationScheme>> GetExternalAuthentications()
+        {
+            return (await this._signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        }
+
+        public AuthenticationProperties GetAuthenticationProperties(string provider, string redirectionUrl)
+        {
+            return this._signInManager.ConfigureExternalAuthenticationProperties(provider, redirectionUrl);
+        }
     }
 }

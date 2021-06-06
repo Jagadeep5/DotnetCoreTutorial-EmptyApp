@@ -35,6 +35,11 @@ namespace core_tool_empty
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDBContext>();
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "152071954153-kl0gc6i8ba2qfghn55fudpprofg4hjc0.apps.googleusercontent.com";
+                options.ClientSecret = "k9wQRuez1dR-AmPqdsm7xJwc";
+            });
 
             services.AddScoped<ICrud, Crud>();
             services.AddScoped<IAuthentication, Authentication>();

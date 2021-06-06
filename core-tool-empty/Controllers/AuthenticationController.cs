@@ -40,9 +40,13 @@ namespace core_tool_empty.Controllers
             return View();
         }
 
-        public IActionResult SignIn()
+        public async Task<IActionResult> SignIn()
         {
-            return View();
+            Login login = new Login()
+            {
+                ExternalAuths = await this._authentication.GetExternalAuthentications()
+            };
+            return View(login);
         }
         [HttpPost]
         public async Task<IActionResult> SignIn(Login login)
@@ -58,6 +62,14 @@ namespace core_tool_empty.Controllers
                 return View();
             }
             return RedirectToAction("Index", "home");
+        }
+
+        public IActionResult ExternalAuth(string provider)
+        {
+            string redirectionUrl = Url.Action("Index", "home");
+            var properties = this._authentication.GetAuthenticationProperties(provider, redirectionUrl);
+            return new ChallengeResult(provider, properties);
+            
         }
     }
 }
